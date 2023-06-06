@@ -1,3 +1,14 @@
+#' Convert between human and mouse orthologs using a variety of methods
+#'
+#' @param genes the genes you wish to convert
+#' @param query the species of your query genes
+#' @param target the species whose orthologs you wish to convert to
+#' @param method the method you wish to use to return the appropriate orthologs
+#'
+#' @return a tibble giving each of your genes and the corresponding orthologs in the other species
+#' @export
+#'
+#' @examples
 hg2mm <- function(genes, 
                   query = c('human', 'mouse'),
                   target = c('mouse', 'human'), 
@@ -17,28 +28,19 @@ hg2mm <- function(genes,
     load_data()
     
     if (method == "one2one") {
-        df <- one2one
+        df <- hg2mm.one2one
     } else if (method == "unique_query") {
-        df <- get(paste0("unique_", query))
+        df <- get(paste0("hg2mm.unique_", query))
         
     } else if (method == "unique_target") {
-        df <- get(paste0("unique_", target))
+        df <- get(paste0("hg2mm.unique_", target))
     } else {
         assertthat::assert_that(method == 'all')
-        df <- ortho
+        df <- hg2mm.ortho
     }
     x <- tibble::tibble(your_gene = genes) %>%
         dplyr::left_join(df, by = c('your_gene' = query))
     return(x)
 }
-# genes <- c("WDR53", "RETNLA", "RETNLB", "INS")
 # RETNLB duplicated on mouse lineage (one gene in human, many in mouse)
-# hg2mm(genes, method = 'one2one')
-# hg2mm(genes, method = 'all')
-#
-# genes <- c("Retnla", "Wdr53")
 # Zscan5b is single gene in mouse but many dups in human
-#
-
-# genes <- c("RETNLB", "ZSCAN5B")
-# genes <- c("Retnlb", "Zscan5b")

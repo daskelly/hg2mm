@@ -1,7 +1,13 @@
+#' Load data to be used by the package
+#'
+#' @return
+#'
+#' @examples
+#' load_data()
 load_data <- function() {
-    if (exists("hg2mm_db")) return()
-    hg2mm_db <- readr::read_tsv("HOM_MouseHumanSequence.rpt")
-    assign("hg2mm_db", hg2mm_db, envir = .GlobalEnv)
+    if (exists("hg2mm.hg2mm_db")) return()
+    hg2mm_db <- readr::read_tsv("HOM_MouseHumanSequence.rpt.gz")
+    assign("hg2mm.hg2mm_db", hg2mm_db, envir = .GlobalEnv)
     
     ## ALL mouse genes have symbols associated:
     # filter(hg2mm_db, `Common Organism Name` == 'mouse, laboratory') %>%
@@ -35,23 +41,23 @@ load_data <- function() {
         dplyr::ungroup() %>%
         dplyr::select(-`DB Class Key`) %>%
         tidyr::unnest(c(mouse, human))
-    assign("ortho", ortho, envir = .GlobalEnv)
+    assign("hg2mm.ortho", ortho, envir = .GlobalEnv)
     
     ## Make a tibble of exact one-to-one gene matches between human-mouse:
     one2one <- dplyr::group_by(ortho, mouse) %>% dplyr::filter(n() == 1) %>%
         dplyr::group_by(human) %>% dplyr::filter(n() == 1)
-    assign("one2one", one2one, envir = .GlobalEnv)
+    assign("hg2mm.one2one", one2one, envir = .GlobalEnv)
     
     ## Make a table of matches between one human gene and 1+ mouse genes
     ## We DON'T want instances where 1 mouse gene maps to multiple human
     ## e.g. filter(ortho, mouse == 'Pla2g4b')
     unique_human <- dplyr::group_by(ortho, mouse) %>% dplyr::filter(n() == 1)
-    assign("unique_human", unique_human, envir = .GlobalEnv)
+    assign("hg2mm.unique_human", unique_human, envir = .GlobalEnv)
     ## Make a table of matches between one mouse gene and 1+ human genes
     ## We DON'T want instances where 1 human gene maps to multiple mouse
     ## e.g. filter(ortho, human == 'RETNLB')
     unique_mouse <- dplyr::group_by(ortho, human) %>% dplyr::filter(n() == 1)
-    assign("unique_mouse", unique_mouse, envir = .GlobalEnv)
+    assign("hg2mm.unique_mouse", unique_mouse, envir = .GlobalEnv)
 }
 
 #filter(unique_human, human == 'RETNLB')
