@@ -1,0 +1,20 @@
+Package: hg2mm
+Title: Convert between human and mouse gene orthologs
+Version: 0.1
+Authors@R: 
+    person("Dan", "Skelly", , "dan.skelly@jax.org", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-2329-2216"))
+Description: This package converts between human and mouse orthologs. The user can choose a variety of methods from returning only one-to-one orthologs, to returning all ortholog relationships, to everything in-between.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    assertthat,
+    dplyr,
+    readr,
+    tibble,
+    tidyr
