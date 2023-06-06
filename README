@@ -1,0 +1,27 @@
+# Package development cheatsheet:
+# https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf
+
+
+library(devtools)
+library(roxygen2)
+
+setwd("~/repos")
+create("hg2mm")
+use_r("load_data")
+use_r("hg2mm")
+# Export functions for users by placing @export in their
+# roxygen comments
+
+usethis::use_testthat(3)   # see https://r-pkgs.org/testing-basics.html
+use_test("hg2mm")
+
+# Import packages that your package requires to work: 
+#use_package(x, type = "imports")
+usethis::use_package("assertthat", "Imports")
+usethis::use_package("readr", "Imports")
+usethis::use_package("tibble", "Imports")
+usethis::use_package("dplyr", "Imports")
+usethis::use_package("tidyr", "Imports")
+
+setwd('./hg2mm')
+document()
