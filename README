@@ -1,6 +1,10 @@
 # Package development cheatsheet:
 # https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf
 
+# For file HOM_MouseHumanSequence.rpt:
+# Download from https://www.informatics.jax.org/downloads/reports/index.html#homology
+# https://www.informatics.jax.org/downloads/reports/HOM_MouseHumanSequence.rpt
+# gzip HOM_MouseHumanSequence.rpt
 
 library(devtools)
 library(roxygen2)
