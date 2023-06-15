@@ -5,6 +5,7 @@
 #' @param target the species whose orthologs you wish to convert to
 #' @param method the method you wish to use to return the appropriate orthologs
 #'
+#' @importFrom magrittr '%>%'
 #' @return a tibble giving each of your genes and the corresponding orthologs in the other species
 #' @export
 #'
