@@ -62,3 +62,8 @@ setwd("~/repos/hg2mm")
 library(devtools)
 load_all()
 ```
+
+For style see
+```r
+styler::style_pkg()
+```
