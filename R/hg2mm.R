@@ -26,7 +26,6 @@ hg2mm <- function(genes,
     target <- match.arg(target)
     assertthat::assert_that(query != target)
     method <- match.arg(method)
-    load_data()
     
     if (method == "one2one") {
         df <- hg2mm.one2one
