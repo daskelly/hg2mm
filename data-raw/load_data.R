@@ -2,7 +2,7 @@
 # This is following methods for working with internal package 
 # data that are outlined at https://r-pkgs.org/data.html
 
-hg2mm_db <- readr::read_tsv("HOM_MouseHumanSequence.rpt.gz")
+hg2mm_db <- readr::read_tsv("data-raw/HOM_MouseHumanSequence.rpt.gz")
 
 ## ALL mouse genes have symbols associated:
 # filter(hg2mm_db, `Common Organism Name` == 'mouse, laboratory') %>%
