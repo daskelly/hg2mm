@@ -9,6 +9,7 @@
 #' @export
 #'
 #' @examples
+#' hg2mm(c("WDR53", "RETNLB"), query = 'human', target = 'mouse', method = 'one2one')
 hg2mm <- function(genes, 
                   query = c('human', 'mouse'),
                   target = c('mouse', 'human'), 
